@@ -1,3 +1,4 @@
 # CoreDeeplink
 
-A description of this package.
+### WalletsApp Deeplink manager
+### P2PApp Deeplink manager
