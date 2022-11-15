@@ -7,8 +7,27 @@
 
 import Foundation
 
-public let DeeplinkIdentifier: String = "com.cryptoner.wallet.deeplinkHandler"
-public let DeeplinkScheme: String = "wallets.cryptoner"
+public enum AppDeeplink {
+    case wallets, p2p
+    
+    var identifier: String {
+        switch self {
+        case .wallets:
+            return "com.cryptoner.wallets.deeplinkHandler"
+        case .p2p:
+            return "com.cryptoner.p2p.deeplinkHandler"
+        }
+    }
+    
+    var scheme: String {
+        switch self {
+        case .wallets:
+            return "wallets.cryptoner.space"
+        case .p2p:
+            return "p2p.cryptoner.space"
+        }
+    }
+}
 
 public struct CoreDeeplinkWalletsApp {
     
@@ -21,9 +40,13 @@ public struct CoreDeeplinkWalletsApp {
     
     /// Обработать deeplinl
     /// - Parameter url: Url ссылка
-    public static func handle(url: URL, isCacheUrl: ((Feature) -> Bool)? = nil) -> CoreDeeplinkWalletsApp? {
+    public static func handle(
+        url: URL,
+        app: AppDeeplink,
+        isCacheUrl: ((Feature) -> Bool)? = nil
+    ) -> CoreDeeplinkWalletsApp? {
         guard
-            url.absoluteString.hasPrefix("\(DeeplinkScheme)://"),
+            url.absoluteString.hasPrefix("\(app.scheme)://"),
             let scheme = Scheme(rawValue: url.host ?? ""),
             let path = Path(rawValue: url.path)
         else {
@@ -129,6 +152,7 @@ public final class DeeplinkBuilder {
     
     // MARK: - Private Propertioes
     
+    private var app: AppDeeplink!
     private var feature: CoreDeeplinkWalletsApp.Feature?
     private var parameters: Dictionary<String, String>?
     
@@ -137,6 +161,11 @@ public final class DeeplinkBuilder {
     public init() {}
     
     // MARK: - Implementation
+    
+    public func set(app: AppDeeplink) -> Self {
+        self.app = app
+        return self
+    }
     
     public func set(feature: CoreDeeplinkWalletsApp.Feature) -> Self {
         self.feature = feature
@@ -153,7 +182,7 @@ public final class DeeplinkBuilder {
             throw BuilderError.wrongBuild
         }
         
-        guard var url = URLComponents(string: "\(DeeplinkScheme)://\(feature.rawValue)") else {
+        guard var url = URLComponents(string: "\(app.scheme)://\(feature.rawValue)") else {
             throw BuilderError.wrongBuild
         }
         
