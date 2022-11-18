@@ -29,7 +29,7 @@ public enum AppDeeplink {
     }
 }
 
-public struct CoreDeeplinkWalletsApp {
+public struct CoreDeeplinkApp {
     
     // MARK: - Public Static
     
@@ -44,7 +44,7 @@ public struct CoreDeeplinkWalletsApp {
         url: URL,
         app: AppDeeplink,
         isCacheUrl: ((Feature) -> Bool)? = nil
-    ) -> CoreDeeplinkWalletsApp? {
+    ) -> CoreDeeplinkApp? {
         guard
             url.absoluteString.hasPrefix("\(app.scheme)://"),
             let scheme = Scheme(rawValue: url.host ?? ""),
@@ -78,8 +78,9 @@ public struct CoreDeeplinkWalletsApp {
     
 }
 
-extension CoreDeeplinkWalletsApp {
+extension CoreDeeplinkApp {
     
+    /// Схема фичей
     private enum Scheme: String {
         
         /// UseCase - Кошельки
@@ -94,6 +95,12 @@ extension CoreDeeplinkWalletsApp {
         /// UseCase - Транзакции
         case transactions
         
+        /// Устройства
+        case devices
+        
+        /// P2PMarket
+        case p2pMarket = "p2p_market"
+        
     }
     
     private enum Path: String {
@@ -103,7 +110,8 @@ extension CoreDeeplinkWalletsApp {
         case open = "/open"
         case send = "/send"
         case receive = "/receive"
-        case detai = "/detail"
+        case detail = "/detail"
+        case list = "/list"
     }
     
     /// Deeplink фунциональновстей
@@ -136,6 +144,12 @@ extension CoreDeeplinkWalletsApp {
         /// Детали транзакций
         case detailTransactions = "transactions/detail"
         
+        /// Список устройств
+        case listDevices = "devices/list"
+        
+        /// Открыть фичу P2PMarketList
+        case listP2PMarket = "p2p_market/list"
+        
     }
     
 }
@@ -153,7 +167,7 @@ public final class DeeplinkBuilder {
     // MARK: - Private Propertioes
     
     private var app: AppDeeplink!
-    private var feature: CoreDeeplinkWalletsApp.Feature?
+    private var feature: CoreDeeplinkApp.Feature?
     private var parameters: Dictionary<String, String>?
     
     // MARK: - Init
@@ -167,7 +181,7 @@ public final class DeeplinkBuilder {
         return self
     }
     
-    public func set(feature: CoreDeeplinkWalletsApp.Feature) -> Self {
+    public func set(feature: CoreDeeplinkApp.Feature) -> Self {
         self.feature = feature
         return self
     }
