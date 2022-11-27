@@ -116,6 +116,7 @@ extension CoreDeeplinkApp {
         case detail = "/detail"
         case list = "/list"
         case chat = "/chat"
+        case actions = "/actions"
     }
     
     /// Deeplink фунциональновстей
@@ -156,6 +157,9 @@ extension CoreDeeplinkApp {
         
         /// Чат поддержки
         case supportChat = "support/chat"
+        
+        /// P2P экран действий
+        case p2pMarketActions = "p2p_market/actions"
         
     }
     
