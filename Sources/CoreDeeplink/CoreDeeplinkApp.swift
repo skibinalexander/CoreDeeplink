@@ -101,6 +101,9 @@ extension CoreDeeplinkApp {
         /// P2PMarket
         case p2pMarket = "p2p_market"
         
+        /// Поддержка
+        case support
+        
     }
     
     private enum Path: String {
@@ -112,6 +115,7 @@ extension CoreDeeplinkApp {
         case receive = "/receive"
         case detail = "/detail"
         case list = "/list"
+        case chat = "/chat"
     }
     
     /// Deeplink фунциональновстей
@@ -149,6 +153,9 @@ extension CoreDeeplinkApp {
         
         /// Открыть фичу P2PMarketList
         case listP2PMarket = "p2p_market/list"
+        
+        /// Чат поддержки
+        case supportChat = "support/chat"
         
     }
     
