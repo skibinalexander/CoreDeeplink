@@ -117,6 +117,8 @@ extension CoreDeeplinkApp {
         case list = "/list"
         case chat = "/chat"
         case actions = "/actions"
+        case virtual = "/virtual"
+        case virtualPush = "/virtual/push"
     }
     
     /// Deeplink фунциональновстей
@@ -160,6 +162,9 @@ extension CoreDeeplinkApp {
         
         /// P2P экран действий
         case p2pMarketActions = "p2p_market/actions"
+        
+        /// Пополнить виртуальный кошелёк
+        case pushVirtualWallets = "wallets/virtual/push"
         
     }
     
