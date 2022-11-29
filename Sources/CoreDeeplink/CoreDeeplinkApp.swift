@@ -119,6 +119,7 @@ extension CoreDeeplinkApp {
         case actions = "/actions"
         case virtual = "/virtual"
         case virtualPush = "/virtual/push"
+        case virtualPull = "/virtual/pull"
     }
     
     /// Deeplink фунциональновстей
@@ -165,6 +166,9 @@ extension CoreDeeplinkApp {
         
         /// Пополнить виртуальный кошелёк
         case pushVirtualWallets = "wallets/virtual/push"
+        
+        /// Вывести средства с виртуального кошелька
+        case pullVirtualWallets = "wallets/virtual/pull"
         
     }
     
