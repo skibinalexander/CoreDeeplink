@@ -104,6 +104,9 @@ extension CoreDeeplinkApp {
         /// Поддержка
         case support
         
+        /// Ввод данных
+        case inputs
+        
     }
     
     private enum Path: String {
@@ -120,6 +123,7 @@ extension CoreDeeplinkApp {
         case virtual = "/virtual"
         case virtualPush = "/virtual/push"
         case virtualPull = "/virtual/pull"
+        case inputsAmount = "/amount"
     }
     
     /// Deeplink фунциональновстей
@@ -169,6 +173,9 @@ extension CoreDeeplinkApp {
         
         /// Вывести средства с виртуального кошелька
         case pullVirtualWallets = "wallets/virtual/pull"
+        
+        /// Ввод значение стоимости
+        case inputsAmount = "inputs/amount"
         
     }
     
