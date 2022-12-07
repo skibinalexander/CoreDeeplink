@@ -11,10 +11,15 @@ let package = Package(
             name: "CoreDeeplink",
             targets: ["CoreDeeplink"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
+    ],
     targets: [
         .target(
             name: "CoreDeeplink",
-            dependencies: [])
+            dependencies: [
+                .product(name: "Swinject", package: "Swinject"),
+            ]
+        )
     ]
 )
